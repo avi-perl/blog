@@ -28,9 +28,9 @@
 
     /* Create four equal columns that sits next to each other */
     .column {
-        -ms-flex: 50%; /* IE10 */
-        flex: 50%;
-        max-width: 50%;
+        -ms-flex: 100%; /* IE10 */
+        flex: 100%;
+        max-width: 100%;
         padding: 0 4px;
     }
 
@@ -43,9 +43,9 @@
     /* Responsive layout - makes a two column-layout instead of four columns */
     @media screen and (max-width: 800px) {
         .column {
-            -ms-flex: 100%;
-            flex: 100%;
-            max-width: 100%;
+            -ms-flex: 50%;
+            flex: 50%;
+            max-width: 50%;
         }
     }
 
@@ -70,7 +70,7 @@
 <!-- Photo Grid -->
 <div class="row">
     <div class="column">
-        <img src="img/1.webp" style="width:100%">
+        <img src="img/1.png" style="width:100%">
         <img src="img/2.webp" style="width:100%">
         <img src="img/3.webp" style="width:100%">
         <img src="img/4.webp" style="width:100%">
