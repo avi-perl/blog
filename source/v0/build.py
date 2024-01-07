@@ -56,7 +56,7 @@ def dir_to_post_data(path: Path) -> dict[str, Any]:
 
     for current_path in path.iterdir():
         if current_path.name.startswith("post"):
-            if current_path.is_file():
+            if current_path.is_file() and current_path.name.lower() == "post.html":
                 return_data["post"] = current_path.read_text()
             elif current_path.is_dir():
                 return_data["post"] = dir_to_post_data(current_path)["post"]
@@ -64,7 +64,7 @@ def dir_to_post_data(path: Path) -> dict[str, Any]:
             return_data["post"] = content_as_html
 
         if current_path.name.startswith("preview"):
-            if current_path.is_file():
+            if current_path.is_file() and current_path.name.lower() == "preview.html":
                 return_data["preview"] = current_path.read_text()
             elif current_path.is_dir():
                 return_data["preview"] = dir_to_post_data(current_path)["preview"]
