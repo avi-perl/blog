@@ -1,0 +1,9 @@
+{% for post in posts %}
+    <article>
+        {% if post.preview %}{{ post.preview }}{% endif %}
+        {% if post.slug %}<a href="{{ dir }}/posts/{{ post.slug }}.html">
+            Read more...
+        </a>{% endif %}
+    </article>
+    <hr />
+{% endfor %}
