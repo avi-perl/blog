@@ -52,17 +52,23 @@ def dir_to_post_data(path: Path) -> dict[str, Any]:
                     "content": current_path.read_text()
                 })
 
+        content_as_html = content_to_html(content, return_data["slug"])
+
         if current_path.name.startswith("post"):
-            return_data["post"] = current_path.read_text() if current_path.is_file() \
-                else dir_to_post_data(current_path)["post"]
-        else:
-            return_data["post"] = content_to_html(content, return_data["slug"])
+            if current_path.is_file():
+                return_data["post"] = current_path.read_text()
+            elif current_path.is_dir():
+                return_data["post"] = dir_to_post_data(current_path)["post"]
+        if not return_data.get("post"):
+            return_data["post"] = content_as_html
 
         if current_path.name.startswith("preview"):
-            return_data["preview"] = current_path.read_text() if current_path.is_file() \
-                else dir_to_post_data(current_path)["preview"]
-        else:
-            return_data["preview"] = content_to_html(content, return_data["slug"])
+            if current_path.is_file():
+                return_data["preview"] = current_path.read_text()
+            elif current_path.is_dir():
+                return_data["preview"] = dir_to_post_data(current_path)["preview"]
+        if not return_data.get("preview"):
+            return_data["preview"] = content_as_html
 
     print(return_data)
     return return_data
