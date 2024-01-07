@@ -103,4 +103,8 @@ if __name__ == "__main__":
         with open(f'v0/posts/{filename}', 'w') as file:
             file.write(output)
 
-    # shutil.copytree(version, Path("../../") / version, dirs_exist_ok=True)
+    shutil.copytree(version, Path("../../") / version, dirs_exist_ok=True)
+    shutil.rmtree(version)
+    shutil.copy("index.html", Path("../../"))
+    shutil.copy("index.html", Path("../../../"))
+    Path("index.html").unlink()
