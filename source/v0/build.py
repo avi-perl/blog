@@ -36,8 +36,9 @@ def dir_to_post_data(path: Path) -> dict[str, Any]:
         "slug": path.name.split("__")[-1].replace(" ", "-"),
         "content": [],
     }
-    content = []
 
+    content = []
+    content_as_html = ""
     for current_path in path.iterdir():
         if current_path.is_file():
             if current_path.suffix.lower() in [".jpg", ".jpeg", ".png"]:
@@ -51,9 +52,9 @@ def dir_to_post_data(path: Path) -> dict[str, Any]:
                     "type": "html",
                     "content": current_path.read_text()
                 })
-
         content_as_html = content_to_html(content, return_data["slug"])
 
+    for current_path in path.iterdir():
         if current_path.name.startswith("post"):
             if current_path.is_file():
                 return_data["post"] = current_path.read_text()
